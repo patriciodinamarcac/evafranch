@@ -29,21 +29,21 @@ export default function PropertyDetail({ property, locale }: Props) {
   );
 
   return (
-    <div className="min-h-screen bg-dark">
+    <div className="min-h-screen bg-white">
       {/* Back nav */}
-      <div className="bg-obsidian border-b border-border">
+      <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center gap-3">
           <Link
             href={`/${locale === "es" ? "" : locale}#properties`}
-            className="text-muted text-xs tracking-[0.15em] uppercase hover:text-gold transition-colors flex items-center gap-2"
+            className="text-gray-400 text-xs tracking-[0.15em] uppercase hover:text-gold transition-colors flex items-center gap-2"
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             {t("back")}
           </Link>
-          <span className="text-border">/</span>
-          <span className="text-muted text-xs">{title}</span>
+          <span className="text-gray-300">/</span>
+          <span className="text-gray-400 text-xs">{title}</span>
         </div>
       </div>
 
@@ -53,7 +53,7 @@ export default function PropertyDetail({ property, locale }: Props) {
           <div>
             {/* Main image */}
             <div
-              className="relative aspect-[4/3] bg-card overflow-hidden cursor-zoom-in mb-3"
+              className="relative aspect-[4/3] bg-gray-100 overflow-hidden cursor-zoom-in mb-3"
               onClick={() => setLightbox(true)}
             >
               {property.images.length > 0 ? (
@@ -78,13 +78,12 @@ export default function PropertyDetail({ property, locale }: Props) {
                 </AnimatePresence>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-muted text-sm">Sin fotos</span>
+                  <span className="text-gray-400 text-sm">Sin fotos</span>
                 </div>
               )}
 
-              {/* Image counter */}
               {property.images.length > 1 && (
-                <div className="absolute bottom-4 right-4 bg-obsidian/80 text-ivory text-xs px-3 py-1">
+                <div className="absolute bottom-4 right-4 bg-black/60 text-white text-xs px-3 py-1">
                   {activeImage + 1} / {property.images.length}
                 </div>
               )}
@@ -110,8 +109,8 @@ export default function PropertyDetail({ property, locale }: Props) {
             {/* Video */}
             {property.video_url && (
               <div className="mt-6">
-                <p className="text-muted text-[0.65rem] tracking-[0.2em] uppercase mb-3">{t("video")}</p>
-                <div className="relative aspect-video bg-card overflow-hidden">
+                <p className="text-gray-400 text-[0.65rem] tracking-[0.2em] uppercase mb-3">{t("video")}</p>
+                <div className="relative aspect-video bg-gray-100 overflow-hidden">
                   <video
                     src={property.video_url}
                     controls
@@ -126,35 +125,35 @@ export default function PropertyDetail({ property, locale }: Props) {
           <div className="lg:sticky lg:top-8">
             {/* Type badge */}
             <div className="flex items-center gap-3 mb-4">
-              <span className="bg-gold text-obsidian text-[0.6rem] tracking-[0.2em] uppercase px-3 py-1.5 font-medium">
+              <span className="bg-gold text-white text-[0.6rem] tracking-[0.2em] uppercase px-3 py-1.5 font-medium">
                 {property.type === "venta" ? t("for_sale") : t("for_rent")}
               </span>
-              <span className="text-muted text-xs tracking-wider">{property.location}</span>
+              <span className="text-gray-400 text-xs tracking-wider">{property.location}</span>
             </div>
 
             <h1
-              className="text-ivory text-3xl sm:text-4xl font-medium leading-tight mb-2"
+              className="text-gray-900 text-3xl sm:text-4xl font-medium leading-tight mb-2"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               {title}
             </h1>
-            <p className="text-gold/70 text-sm tracking-[0.12em] uppercase mb-6">{subtitle}</p>
+            <p className="text-gold text-sm tracking-[0.12em] uppercase mb-6">{subtitle}</p>
 
             {/* Price */}
-            <div className="mb-8 pb-8 border-b border-border">
+            <div className="mb-8 pb-8 border-b border-gray-200">
               <p
                 className="text-gold text-4xl font-medium"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 UF {property.price_uf.toLocaleString("es-CL")}
               </p>
-              <p className="text-muted text-sm mt-1">
+              <p className="text-gray-400 text-sm mt-1">
                 $ {property.price_clp.toLocaleString("es-CL")}
               </p>
             </div>
 
             {/* Specs */}
-            <div className="grid grid-cols-4 gap-4 mb-8 pb-8 border-b border-border">
+            <div className="grid grid-cols-4 gap-4 mb-8 pb-8 border-b border-gray-200">
               {[
                 { value: property.bedrooms, label: t("bedrooms") },
                 { value: property.bathrooms, label: t("bathrooms") },
@@ -163,33 +162,33 @@ export default function PropertyDetail({ property, locale }: Props) {
               ].map((spec, i) => (
                 <div key={i} className="text-center">
                   <p
-                    className="text-ivory text-2xl font-medium"
+                    className="text-gray-900 text-2xl font-medium"
                     style={{ fontFamily: "var(--font-playfair)" }}
                   >
                     {spec.value}
                   </p>
-                  <p className="text-muted text-[0.6rem] tracking-wider uppercase mt-1">{spec.label}</p>
+                  <p className="text-gray-400 text-[0.6rem] tracking-wider uppercase mt-1">{spec.label}</p>
                 </div>
               ))}
             </div>
 
             {/* Description */}
             {description && (
-              <div className="mb-8 pb-8 border-b border-border">
-                <p className="text-muted text-[0.65rem] tracking-[0.2em] uppercase mb-4">{t("description")}</p>
-                <p className="text-ivory/70 text-sm leading-relaxed font-light">{description}</p>
+              <div className="mb-8 pb-8 border-b border-gray-200">
+                <p className="text-gray-400 text-[0.65rem] tracking-[0.2em] uppercase mb-4">{t("description")}</p>
+                <p className="text-gray-600 text-sm leading-relaxed font-light">{description}</p>
               </div>
             )}
 
             {/* Features */}
             {features.length > 0 && (
-              <div className="mb-8 pb-8 border-b border-border">
-                <p className="text-muted text-[0.65rem] tracking-[0.2em] uppercase mb-4">{t("features")}</p>
+              <div className="mb-8 pb-8 border-b border-gray-200">
+                <p className="text-gray-400 text-[0.65rem] tracking-[0.2em] uppercase mb-4">{t("features")}</p>
                 <div className="flex flex-wrap gap-2">
                   {features.map((f, i) => (
                     <span
                       key={i}
-                      className="text-ivory/60 text-[0.65rem] border border-border px-3 py-1.5 tracking-wide"
+                      className="text-gray-600 text-[0.65rem] border border-gray-200 px-3 py-1.5 tracking-wide"
                     >
                       {f}
                     </span>
@@ -217,7 +216,7 @@ export default function PropertyDetail({ property, locale }: Props) {
                   href={property.portal_link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center border border-gold text-gold text-xs tracking-[0.2em] uppercase px-6 py-4 hover:bg-gold hover:text-obsidian transition-all duration-300 font-medium"
+                  className="flex items-center justify-center border border-gold text-gold text-xs tracking-[0.2em] uppercase px-6 py-4 hover:bg-gold hover:text-white transition-all duration-300 font-medium"
                 >
                   {t("portal_cta")}
                 </a>
@@ -229,18 +228,18 @@ export default function PropertyDetail({ property, locale }: Props) {
         {/* Map */}
         {property.lat && property.lng && (
           <div className="mt-16">
-            <p className="text-muted text-[0.65rem] tracking-[0.2em] uppercase mb-4">{t("location")}</p>
-            <div className="h-64 bg-card border border-border flex items-center justify-center">
+            <p className="text-gray-400 text-[0.65rem] tracking-[0.2em] uppercase mb-4">{t("location")}</p>
+            <div className="h-64 bg-gray-100 border border-gray-200 flex items-center justify-center">
               <a
                 href={`https://maps.google.com/?q=${property.lat},${property.lng}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center gap-3 text-muted hover:text-gold transition-colors"
+                className="flex flex-col items-center gap-3 text-gray-400 hover:text-gold transition-colors"
               >
                 <svg className="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
-                <span className="text-sm">{property.location}</span>
+                <span className="text-sm text-gray-600">{property.location}</span>
                 <span className="text-xs tracking-wider underline">{t("open_map")}</span>
               </a>
             </div>
@@ -252,14 +251,14 @@ export default function PropertyDetail({ property, locale }: Props) {
       <AnimatePresence>
         {lightbox && (
           <motion.div
-            className="fixed inset-0 bg-obsidian/95 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setLightbox(false)}
           >
             <button
-              className="absolute top-4 right-4 text-muted hover:text-ivory text-3xl leading-none"
+              className="absolute top-4 right-4 text-white/60 hover:text-white text-3xl leading-none"
               onClick={() => setLightbox(false)}
             >
               ×
@@ -279,7 +278,7 @@ export default function PropertyDetail({ property, locale }: Props) {
             {property.images.length > 1 && (
               <>
                 <button
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-obsidian/60 flex items-center justify-center text-ivory hover:text-gold transition-colors"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 flex items-center justify-center text-white hover:text-gold transition-colors"
                   onClick={(e) => { e.stopPropagation(); setActiveImage((a) => (a - 1 + property.images.length) % property.images.length); }}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -287,7 +286,7 @@ export default function PropertyDetail({ property, locale }: Props) {
                   </svg>
                 </button>
                 <button
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-obsidian/60 flex items-center justify-center text-ivory hover:text-gold transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 flex items-center justify-center text-white hover:text-gold transition-colors"
                   onClick={(e) => { e.stopPropagation(); setActiveImage((a) => (a + 1) % property.images.length); }}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="bg-obsidian text-ivory antialiased">
+      <body className="bg-gray-50 text-gray-900 antialiased">
         {children}
       </body>
     </html>

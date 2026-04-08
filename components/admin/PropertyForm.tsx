@@ -160,8 +160,8 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
   };
 
   const inputClass =
-    "w-full bg-card border border-border text-ivory placeholder:text-muted/40 px-4 py-2.5 text-sm font-light focus:outline-none focus:border-gold transition-colors duration-300";
-  const labelClass = "text-muted text-[0.65rem] tracking-[0.2em] uppercase block mb-2";
+    "w-full bg-white border border-gray-200 text-gray-900 placeholder:text-gray-300 px-4 py-2.5 text-sm font-light focus:outline-none focus:border-gold transition-colors duration-300";
+  const labelClass = "text-gray-500 text-[0.65rem] tracking-[0.2em] uppercase block mb-2";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
@@ -381,7 +381,7 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
             type="button"
             onClick={() => fileRef.current?.click()}
             disabled={uploading}
-            className="aspect-square border border-dashed border-border hover:border-gold flex flex-col items-center justify-center text-muted hover:text-gold transition-all duration-300 text-xs gap-1"
+            className="aspect-square border border-dashed border-gray-300 hover:border-gold flex flex-col items-center justify-center text-gray-400 hover:text-gold transition-all duration-300 text-xs gap-1"
           >
             {uploading ? (
               <span>Subiendo...</span>
@@ -404,21 +404,21 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
       </div>
 
       {error && (
-        <p className="text-red-400 text-sm">{error}</p>
+        <p className="text-red-500 text-sm">{error}</p>
       )}
 
       {/* Actions */}
-      <div className="flex items-center gap-4 pt-4 border-t border-border">
+      <div className="flex items-center gap-4 pt-4 border-t border-gray-200">
         <button
           type="submit"
           disabled={saving}
-          className="bg-gold text-obsidian text-xs tracking-[0.2em] uppercase px-8 py-3.5 font-medium hover:bg-gold/90 transition-colors duration-300 disabled:opacity-60"
+          className="bg-gold text-white text-xs tracking-[0.2em] uppercase px-8 py-3.5 font-medium hover:bg-gold/90 transition-colors duration-300 disabled:opacity-60"
         >
           {saving ? "Guardando..." : initial ? "Guardar Cambios" : "Crear Propiedad"}
         </button>
         <a
           href="/admin"
-          className="text-muted text-xs hover:text-ivory transition-colors"
+          className="text-gray-400 text-xs hover:text-gray-700 transition-colors"
         >
           Cancelar
         </a>

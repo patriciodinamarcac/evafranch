@@ -17,7 +17,7 @@ export default function AdminDeleteButton({ id }: { id: string }) {
   return (
     <button
       onClick={handleDelete}
-      className="text-red-400/60 text-xs hover:text-red-400 transition-colors"
+      className="text-red-300 text-xs hover:text-red-500 transition-colors"
     >
       Eliminar
     </button>

@@ -16,7 +16,7 @@ export default function AdminLogoutButton() {
   return (
     <button
       onClick={handleLogout}
-      className="text-muted text-xs tracking-[0.15em] uppercase hover:text-gold transition-colors"
+      className="text-gray-400 text-xs tracking-[0.15em] uppercase hover:text-gold transition-colors"
     >
       Salir
     </button>
