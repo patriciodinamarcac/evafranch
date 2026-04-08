@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "properties": "Propiedades",
+    "about": "Sobre Mí",
+    "process": "El Proceso",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "location": "Santiago de Chile",
+    "tagline": "Propiedades que definen un estilo de vida",
+    "cta": "Explorar Propiedades",
+    "scroll": "Descubrir"
+  },
+  "about": {
+    "label": "La Agente",
+    "title": "Eva Franch Castells",
+    "bio1": "Periodista española con raíces en Cataluña y un espíritu cosmopolita que la llevó a enamorarse de Santiago de Chile. Apasionada por las grandes ciudades, el diseño y la moda, encontró en la industria inmobiliaria la intersección perfecta entre su sensibilidad estética y su capacidad para conectar personas con espacios que transforman vidas.",
+    "bio2": "Con una mirada única formada en Europa y templada por el dinamismo de la capital chilena, Eva acompaña a sus clientes en uno de los momentos más importantes de sus vidas: encontrar el lugar que llaman hogar.",
+    "stat1_value": "100%",
+    "stat1_label": "Dedicación al cliente",
+    "stat2_value": "Gran",
+    "stat2_label": "Santiago",
+    "stat3_value": "RE/MAX",
+    "stat3_label": "Agente certificada"
+  },
+  "properties": {
+    "label": "Cartera Exclusiva",
+    "title": "Propiedades Seleccionadas",
+    "subtitle": "Cada propiedad es elegida por su calidad, ubicación y potencial. No vendemos espacios, creamos oportunidades.",
+    "cta": "Consultar",
+    "whatsapp": "Consultar por WhatsApp",
+    "whatsapp_msg": "Hola Eva, me interesa la propiedad *{title}* en {location} (UF {price}). {link} ¿Podemos conversar?",
+    "bedrooms": "Dorm.",
+    "bathrooms": "Baños",
+    "parking": "Est.",
+    "m2": "m²",
+    "price_label": "Precio",
+    "expenses": "Gastos comunes",
+    "features": "Características"
+  },
+  "process": {
+    "label": "El Proceso",
+    "title": "Cómo Trabajo",
+    "subtitle": "Un acompañamiento personalizado desde el primer contacto hasta la firma final.",
+    "step1_num": "01",
+    "step1_title": "Asesoría Inicial",
+    "step1_desc": "Conversamos sobre tus necesidades, presupuesto y visión. Entender tu estilo de vida es el primer paso para encontrar la propiedad ideal.",
+    "step2_num": "02",
+    "step2_title": "Selección Curada",
+    "step2_desc": "Filtramos el mercado con criterio profesional. Sólo te presento propiedades que realmente coinciden con lo que buscas, sin perder tu tiempo.",
+    "step3_num": "03",
+    "step3_title": "Cierre Exitoso",
+    "step3_desc": "Te acompaño en cada detalle del proceso legal y financiero. Mi objetivo es que llegues a la firma con total tranquilidad y confianza."
+  },
+  "contact": {
+    "label": "Contacto",
+    "title": "Hablemos",
+    "subtitle": "¿Tienes una propiedad en mente o buscas una nueva? Escríbeme y te respondo a la brevedad.",
+    "name": "Tu nombre",
+    "email": "Correo electrónico",
+    "phone": "Teléfono (opcional)",
+    "message": "¿En qué puedo ayudarte?",
+    "submit": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado! Te contactaré pronto.",
+    "whatsapp": "Escribir por WhatsApp",
+    "or": "o"
+  },
+  "property": {
+    "back": "Volver a Propiedades",
+    "for_sale": "En Venta",
+    "for_rent": "En Arriendo",
+    "description": "Descripción",
+    "features": "Características",
+    "bedrooms": "Dorm.",
+    "bathrooms": "Baños",
+    "m2": "m²",
+    "parking": "Est.",
+    "video": "Video",
+    "location": "Ubicación",
+    "open_map": "Ver en Google Maps",
+    "whatsapp_cta": "Consultar por WhatsApp",
+    "portal_cta": "Ver en Portal"
+  },
+  "footer": {
+    "tagline": "Propiedades exclusivas en el Gran Santiago.",
+    "rights": "Todos los derechos reservados.",
+    "agent": "Agente RE/MAX · Santiago de Chile"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "properties": "Properties",
+    "about": "About",
+    "process": "Process",
+    "contact": "Contact"
+  },
+  "hero": {
+    "location": "Santiago de Chile",
+    "tagline": "Properties that define a lifestyle",
+    "cta": "Explore Properties",
+    "scroll": "Discover"
+  },
+  "about": {
+    "label": "The Agent",
+    "title": "Eva Franch Castells",
+    "bio1": "A Spanish journalist with roots in Catalonia and a cosmopolitan spirit that led her to fall in love with Santiago de Chile. Passionate about great cities, design, and fashion, she found in real estate the perfect intersection between her aesthetic sensibility and her ability to connect people with spaces that transform lives.",
+    "bio2": "With a unique perspective shaped in Europe and tempered by the dynamism of the Chilean capital, Eva guides her clients through one of the most important moments of their lives: finding the place they call home.",
+    "stat1_value": "100%",
+    "stat1_label": "Client dedication",
+    "stat2_value": "Greater",
+    "stat2_label": "Santiago",
+    "stat3_value": "RE/MAX",
+    "stat3_label": "Certified agent"
+  },
+  "properties": {
+    "label": "Exclusive Portfolio",
+    "title": "Selected Properties",
+    "subtitle": "Each property is chosen for its quality, location, and potential. We don't sell spaces, we create opportunities.",
+    "cta": "Inquire",
+    "whatsapp": "Ask via WhatsApp",
+    "whatsapp_msg": "Hi Eva, I'm interested in the property *{title}* in {location} (UF {price}). {link} Can we talk?",
+    "bedrooms": "Bed.",
+    "bathrooms": "Bath",
+    "parking": "Park.",
+    "m2": "m²",
+    "price_label": "Price",
+    "expenses": "Monthly fees",
+    "features": "Features"
+  },
+  "process": {
+    "label": "The Process",
+    "title": "How I Work",
+    "subtitle": "Personalized guidance from first contact to final signature.",
+    "step1_num": "01",
+    "step1_title": "Initial Consultation",
+    "step1_desc": "We discuss your needs, budget, and vision. Understanding your lifestyle is the first step to finding the ideal property.",
+    "step2_num": "02",
+    "step2_title": "Curated Selection",
+    "step2_desc": "We filter the market with professional criteria. I only present properties that truly match what you're looking for, without wasting your time.",
+    "step3_num": "03",
+    "step3_title": "Successful Closing",
+    "step3_desc": "I accompany you through every detail of the legal and financial process. My goal is for you to reach the signing with complete peace of mind."
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Let's Talk",
+    "subtitle": "Have a property in mind or looking for a new one? Write to me and I'll get back to you shortly.",
+    "name": "Your name",
+    "email": "Email address",
+    "phone": "Phone (optional)",
+    "message": "How can I help you?",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent! I'll be in touch soon.",
+    "whatsapp": "Message on WhatsApp",
+    "or": "or"
+  },
+  "property": {
+    "back": "Back to Properties",
+    "for_sale": "For Sale",
+    "for_rent": "For Rent",
+    "description": "Description",
+    "features": "Features",
+    "bedrooms": "Bed.",
+    "bathrooms": "Bath",
+    "m2": "m²",
+    "parking": "Park.",
+    "video": "Video",
+    "location": "Location",
+    "open_map": "Open in Google Maps",
+    "whatsapp_cta": "Ask via WhatsApp",
+    "portal_cta": "View on Portal"
+  },
+  "footer": {
+    "tagline": "Exclusive properties in Greater Santiago.",
+    "rights": "All rights reserved.",
+    "agent": "RE/MAX Agent · Santiago de Chile"
+  }
+}
