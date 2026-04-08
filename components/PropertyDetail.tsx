@@ -176,6 +176,20 @@ export default function PropertyDetail({ property, locale }: Props) {
               ))}
             </div>
 
+            {/* Extra specs */}
+            {property.extra_specs?.length > 0 && (
+              <div className="mb-8 pb-8 border-b border-gray-200">
+                <div className="grid grid-cols-2 gap-3">
+                  {property.extra_specs.map((spec, i) => (
+                    <div key={i} className="flex justify-between items-center py-2 border-b border-gray-100">
+                      <span className="text-gray-400 text-xs tracking-wide uppercase">{spec.label}</span>
+                      <span className="text-gray-900 text-sm font-medium">{spec.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Description */}
             {description && (
               <div className="mb-8 pb-8 border-b border-gray-200">

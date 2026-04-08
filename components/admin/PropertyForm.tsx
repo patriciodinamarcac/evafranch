@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Property } from "@/lib/supabase/types";
 import FeaturesInput from "./FeaturesInput";
+import SpecsEditor, { SpecItem } from "./SpecsEditor";
 
 type FormData = Omit<Property, "id" | "created_at" | "updated_at">;
 
@@ -32,6 +33,7 @@ const emptyForm: FormData = {
   images: [],
   video_url: null,
   portal_link: null,
+  extra_specs: [],
 };
 
 function slugify(text: string) {
@@ -72,11 +74,13 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
           images: initial.images,
           video_url: initial.video_url,
           portal_link: initial.portal_link,
+          extra_specs: initial.extra_specs ?? [],
         }
       : emptyForm
   );
 
   const [features, setFeatures] = useState<string[]>(initial?.features_es ?? []);
+  const [extraSpecs, setExtraSpecs] = useState<SpecItem[]>(initial?.extra_specs ?? []);
   const [ufValue, setUfValue] = useState<number | null>(null);
 
   useEffect(() => {
@@ -157,6 +161,7 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
       description_en: form.description_es,
       features_es: features,
       features_en: features,
+      extra_specs: extraSpecs.filter((s) => s.label.trim()),
     };
 
     let err;
@@ -369,6 +374,13 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Extra specs */}
+      <div>
+        <label className={labelClass}>Campos adicionales</label>
+        <p className="text-gray-400 text-xs mb-3">Añade campos personalizados: Bodega, Piso, Año de construcción, etc.</p>
+        <SpecsEditor value={extraSpecs} onChange={setExtraSpecs} />
       </div>
 
       {/* Description */}

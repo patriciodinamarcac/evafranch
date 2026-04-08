@@ -26,6 +26,7 @@ export interface Property {
   images: string[]; // Supabase Storage public URLs
   video_url: string | null;
   portal_link: string | null;
+  extra_specs: { label: string; value: string }[];
   created_at: string;
   updated_at: string;
 }
