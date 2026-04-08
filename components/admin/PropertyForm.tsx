@@ -75,11 +75,8 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
       : emptyForm
   );
 
-  const [featuresEsText, setFeaturesEsText] = useState(
+  const [featuresText, setFeaturesText] = useState(
     (initial?.features_es ?? []).join(", ")
-  );
-  const [featuresEnText, setFeaturesEnText] = useState(
-    (initial?.features_en ?? []).join(", ")
   );
 
   const [uploading, setUploading] = useState(false);
@@ -92,6 +89,7 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
 
   const handleTitleEs = (val: string) => {
     set("title_es", val);
+    set("title_en", val); // copy to English
     if (!initial) set("slug", slugify(val));
   };
 
@@ -127,11 +125,17 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
     setSaving(true);
     setError("");
 
+    const features = featuresText.split(",").map((s) => s.trim()).filter(Boolean);
+
     const supabase = createClient();
     const payload = {
       ...form,
-      features_es: featuresEsText.split(",").map((s) => s.trim()).filter(Boolean),
-      features_en: featuresEnText.split(",").map((s) => s.trim()).filter(Boolean),
+      // Copy Spanish to English automatically
+      title_en: form.title_es,
+      subtitle_en: form.subtitle_es,
+      description_en: form.description_es,
+      features_es: features,
+      features_en: features,
     };
 
     let err;
@@ -189,53 +193,29 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
         </div>
       </div>
 
-      {/* Titles */}
-      <div className="grid sm:grid-cols-2 gap-6">
-        <div>
-          <label className={labelClass}>Título (Español)</label>
-          <input
-            type="text"
-            required
-            value={form.title_es}
-            onChange={(e) => handleTitleEs(e.target.value)}
-            className={inputClass}
-            placeholder="Moderno departamento en Providencia"
-          />
-        </div>
-        <div>
-          <label className={labelClass}>Título (Inglés)</label>
-          <input
-            type="text"
-            value={form.title_en}
-            onChange={(e) => set("title_en", e.target.value)}
-            className={inputClass}
-            placeholder="Modern apartment in Providencia"
-          />
-        </div>
+      {/* Title */}
+      <div>
+        <label className={labelClass}>Título</label>
+        <input
+          type="text"
+          required
+          value={form.title_es}
+          onChange={(e) => handleTitleEs(e.target.value)}
+          className={inputClass}
+          placeholder="Tríplex Inés de Suárez"
+        />
       </div>
 
-      {/* Subtitles */}
-      <div className="grid sm:grid-cols-2 gap-6">
-        <div>
-          <label className={labelClass}>Subtítulo (Español)</label>
-          <input
-            type="text"
-            value={form.subtitle_es}
-            onChange={(e) => set("subtitle_es", e.target.value)}
-            className={inputClass}
-            placeholder="Departamento · 3 dormitorios"
-          />
-        </div>
-        <div>
-          <label className={labelClass}>Subtítulo (Inglés)</label>
-          <input
-            type="text"
-            value={form.subtitle_en}
-            onChange={(e) => set("subtitle_en", e.target.value)}
-            className={inputClass}
-            placeholder="Apartment · 3 bedrooms"
-          />
-        </div>
+      {/* Subtitle */}
+      <div>
+        <label className={labelClass}>Subtítulo</label>
+        <input
+          type="text"
+          value={form.subtitle_es}
+          onChange={(e) => { set("subtitle_es", e.target.value); set("subtitle_en", e.target.value); }}
+          className={inputClass}
+          placeholder="Con Quincho Privado"
+        />
       </div>
 
       {/* Slug */}
@@ -247,7 +227,7 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
           value={form.slug}
           onChange={(e) => set("slug", e.target.value)}
           className={inputClass}
-          placeholder="moderno-departamento-providencia"
+          placeholder="triplex-ines-suarez"
         />
         <p className="text-muted text-xs mt-1">
           URL: /propiedades/{form.slug || "..."}
@@ -304,7 +284,7 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
             value={form.price_uf}
             onChange={(e) => set("price_uf", parseFloat(e.target.value))}
             className={inputClass}
-            placeholder="15000"
+            placeholder="7490"
           />
         </div>
         <div>
@@ -316,7 +296,7 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
             value={form.price_clp}
             onChange={(e) => set("price_clp", parseFloat(e.target.value))}
             className={inputClass}
-            placeholder="600000000"
+            placeholder="298414483"
           />
         </div>
       </div>
@@ -344,52 +324,28 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
         ))}
       </div>
 
-      {/* Descriptions */}
-      <div className="grid sm:grid-cols-2 gap-6">
-        <div>
-          <label className={labelClass}>Descripción (Español)</label>
-          <textarea
-            rows={5}
-            value={form.description_es}
-            onChange={(e) => set("description_es", e.target.value)}
-            className={`${inputClass} resize-none`}
-            placeholder="Descripción completa de la propiedad..."
-          />
-        </div>
-        <div>
-          <label className={labelClass}>Descripción (Inglés)</label>
-          <textarea
-            rows={5}
-            value={form.description_en}
-            onChange={(e) => set("description_en", e.target.value)}
-            className={`${inputClass} resize-none`}
-            placeholder="Full property description..."
-          />
-        </div>
+      {/* Description */}
+      <div>
+        <label className={labelClass}>Descripción</label>
+        <textarea
+          rows={5}
+          value={form.description_es}
+          onChange={(e) => { set("description_es", e.target.value); set("description_en", e.target.value); }}
+          className={`${inputClass} resize-none`}
+          placeholder="Descripción completa de la propiedad..."
+        />
       </div>
 
       {/* Features */}
-      <div className="grid sm:grid-cols-2 gap-6">
-        <div>
-          <label className={labelClass}>Características (Español, separadas por coma)</label>
-          <input
-            type="text"
-            value={featuresEsText}
-            onChange={(e) => setFeaturesEsText(e.target.value)}
-            className={inputClass}
-            placeholder="Piscina, Gimnasio, Terraza"
-          />
-        </div>
-        <div>
-          <label className={labelClass}>Features (English, comma separated)</label>
-          <input
-            type="text"
-            value={featuresEnText}
-            onChange={(e) => setFeaturesEnText(e.target.value)}
-            className={inputClass}
-            placeholder="Pool, Gym, Terrace"
-          />
-        </div>
+      <div>
+        <label className={labelClass}>Características (separadas por coma)</label>
+        <input
+          type="text"
+          value={featuresText}
+          onChange={(e) => setFeaturesText(e.target.value)}
+          className={inputClass}
+          placeholder="Piscina, Gimnasio, Terraza, Conserjería 24/7"
+        />
       </div>
 
       {/* Portal link */}
