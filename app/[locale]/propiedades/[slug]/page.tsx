@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { Property } from "@/lib/supabase/types";
 import PropertyDetail from "@/components/PropertyDetail";
@@ -47,7 +46,5 @@ export default async function PropertyPage({ params }: Props) {
 
   if (!data) notFound();
 
-  const t = await getTranslations({ locale, namespace: "property" });
-
-  return <PropertyDetail property={data as Property} locale={locale} t={t} />;
+  return <PropertyDetail property={data as Property} locale={locale} />;
 }

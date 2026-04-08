@@ -4,16 +4,16 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Property } from "@/lib/supabase/types";
 
 interface Props {
   property: Property;
   locale: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  t: any;
 }
 
-export default function PropertyDetail({ property, locale, t }: Props) {
+export default function PropertyDetail({ property, locale }: Props) {
+  const t = useTranslations("property");
   const [activeImage, setActiveImage] = useState(0);
   const [lightbox, setLightbox] = useState(false);
 
