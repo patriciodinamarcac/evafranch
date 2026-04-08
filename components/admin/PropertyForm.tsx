@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Property } from "@/lib/supabase/types";
+import FeaturesInput from "./FeaturesInput";
 
 type FormData = Omit<Property, "id" | "created_at" | "updated_at">;
 
@@ -75,9 +76,7 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
       : emptyForm
   );
 
-  const [featuresText, setFeaturesText] = useState(
-    (initial?.features_es ?? []).join(", ")
-  );
+  const [features, setFeatures] = useState<string[]>(initial?.features_es ?? []);
 
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -124,8 +123,6 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
     e.preventDefault();
     setSaving(true);
     setError("");
-
-    const features = featuresText.split(",").map((s) => s.trim()).filter(Boolean);
 
     const supabase = createClient();
     const payload = {
@@ -338,14 +335,8 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
 
       {/* Features */}
       <div>
-        <label className={labelClass}>Características (separadas por coma)</label>
-        <input
-          type="text"
-          value={featuresText}
-          onChange={(e) => setFeaturesText(e.target.value)}
-          className={inputClass}
-          placeholder="Piscina, Gimnasio, Terraza, Conserjería 24/7"
-        />
+        <label className={labelClass}>Características</label>
+        <FeaturesInput value={features} onChange={setFeatures} />
       </div>
 
       {/* Portal link */}

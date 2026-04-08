@@ -1,11 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Property } from "@/lib/supabase/types";
+import "leaflet/dist/leaflet.css";
+
+const PropertyMap = dynamic(() => import("@/components/PropertyMap"), { ssr: false });
 
 interface Props {
   property: Property;
@@ -229,20 +233,17 @@ export default function PropertyDetail({ property, locale }: Props) {
         {property.lat && property.lng && (
           <div className="mt-16">
             <p className="text-gray-400 text-[0.65rem] tracking-[0.2em] uppercase mb-4">{t("location")}</p>
-            <div className="h-64 bg-gray-100 border border-gray-200 flex items-center justify-center">
-              <a
-                href={`https://maps.google.com/?q=${property.lat},${property.lng}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-3 text-gray-400 hover:text-gold transition-colors"
-              >
-                <svg className="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm text-gray-600">{property.location}</span>
-                <span className="text-xs tracking-wider underline">{t("open_map")}</span>
-              </a>
+            <div className="h-80 border border-gray-200 overflow-hidden">
+              <PropertyMap lat={property.lat} lng={property.lng} title={title} />
             </div>
+            <a
+              href={`https://maps.google.com/?q=${property.lat},${property.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2 text-gray-400 text-xs hover:text-gold transition-colors underline"
+            >
+              {t("open_map")}
+            </a>
           </div>
         )}
       </main>
