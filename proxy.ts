@@ -8,8 +8,14 @@ const intlMiddleware = createIntlMiddleware(routing);
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Protect /admin routes (except /admin/login)
-  if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
+  // Admin routes: bypass next-intl entirely
+  if (pathname.startsWith("/admin")) {
+    // /admin/login is public
+    if (pathname === "/admin/login") {
+      return NextResponse.next();
+    }
+
+    // All other /admin/* routes require auth
     let response = NextResponse.next({ request });
 
     const supabase = createServerClient(
