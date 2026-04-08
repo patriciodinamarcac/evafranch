@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Property } from "@/lib/supabase/types";
@@ -77,6 +77,14 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
   );
 
   const [features, setFeatures] = useState<string[]>(initial?.features_es ?? []);
+  const [ufValue, setUfValue] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("https://mindicador.cl/api/uf")
+      .then((r) => r.json())
+      .then((data) => setUfValue(data.serie?.[0]?.valor ?? null))
+      .catch(() => null);
+  }, []);
 
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -85,6 +93,22 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
 
   const set = (key: keyof FormData, value: unknown) =>
     setForm((f) => ({ ...f, [key]: value }));
+
+  const handleUfChange = (val: string) => {
+    const uf = parseFloat(val) || 0;
+    set("price_uf", uf);
+    if (ufValue && uf > 0) {
+      set("price_clp", Math.round(uf * ufValue));
+    }
+  };
+
+  const handleClpChange = (val: string) => {
+    const clp = parseFloat(val) || 0;
+    set("price_clp", clp);
+    if (ufValue && clp > 0) {
+      set("price_uf", Math.round((clp / ufValue) * 100) / 100);
+    }
+  };
 
   const handleTitleEs = (val: string) => {
     set("title_es", val);
@@ -271,30 +295,39 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
       </div>
 
       {/* Price */}
-      <div className="grid sm:grid-cols-2 gap-6">
-        <div>
-          <label className={labelClass}>Precio UF</label>
-          <input
-            type="number"
-            required
-            min={0}
-            value={form.price_uf}
-            onChange={(e) => set("price_uf", parseFloat(e.target.value))}
-            className={inputClass}
-            placeholder="7490"
-          />
-        </div>
-        <div>
-          <label className={labelClass}>Precio CLP</label>
-          <input
-            type="number"
-            required
-            min={0}
-            value={form.price_clp}
-            onChange={(e) => set("price_clp", parseFloat(e.target.value))}
-            className={inputClass}
-            placeholder="298414483"
-          />
+      <div>
+        {ufValue && (
+          <p className="text-gray-400 text-xs mb-3">
+            UF hoy: <span className="text-gold font-medium">${ufValue.toLocaleString("es-CL")}</span>
+            {" "}— los valores se convierten automáticamente
+          </p>
+        )}
+        <div className="grid sm:grid-cols-2 gap-6">
+          <div>
+            <label className={labelClass}>Precio UF</label>
+            <input
+              type="number"
+              required
+              min={0}
+              step="0.01"
+              value={form.price_uf || ""}
+              onChange={(e) => handleUfChange(e.target.value)}
+              className={inputClass}
+              placeholder="7490"
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Precio CLP</label>
+            <input
+              type="number"
+              required
+              min={0}
+              value={form.price_clp || ""}
+              onChange={(e) => handleClpChange(e.target.value)}
+              className={inputClass}
+              placeholder="298414483"
+            />
+          </div>
         </div>
       </div>
 
