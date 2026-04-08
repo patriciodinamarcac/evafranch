@@ -335,21 +335,38 @@ export default function PropertyForm({ initial }: { initial?: Property }) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
         {(
           [
-            { key: "bedrooms", label: "Dormitorios" },
-            { key: "bathrooms", label: "Baños" },
-            { key: "total_m2", label: "m² totales" },
-            { key: "parking", label: "Estacionam." },
-          ] as { key: keyof FormData; label: string }[]
-        ).map(({ key, label }) => (
+            { key: "bedrooms", label: "Dormitorios", step: 1, decimal: false },
+            { key: "bathrooms", label: "Baños", step: 0.5, decimal: true },
+            { key: "total_m2", label: "m² totales", step: 1, decimal: false },
+            { key: "parking", label: "Estacionam.", step: 1, decimal: false },
+          ] as { key: keyof FormData; label: string; step: number; decimal: boolean }[]
+        ).map(({ key, label, step, decimal }) => (
           <div key={key}>
             <label className={labelClass}>{label}</label>
-            <input
-              type="number"
-              min={0}
-              value={form[key] as number}
-              onChange={(e) => set(key, parseFloat(e.target.value))}
-              className={inputClass}
-            />
+            <div className="flex items-center border border-gray-200 bg-white">
+              <button
+                type="button"
+                onClick={() => set(key, Math.max(0, (form[key] as number) - step))}
+                className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-gold hover:bg-gray-50 transition-colors text-lg flex-shrink-0"
+              >
+                −
+              </button>
+              <input
+                type="number"
+                min={0}
+                step={step}
+                value={form[key] as number}
+                onChange={(e) => set(key, decimal ? parseFloat(e.target.value) : parseInt(e.target.value))}
+                className="flex-1 text-center text-gray-900 text-sm font-medium bg-transparent focus:outline-none py-2"
+              />
+              <button
+                type="button"
+                onClick={() => set(key, (form[key] as number) + step)}
+                className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-gold hover:bg-gray-50 transition-colors text-lg flex-shrink-0"
+              >
+                +
+              </button>
+            </div>
           </div>
         ))}
       </div>
